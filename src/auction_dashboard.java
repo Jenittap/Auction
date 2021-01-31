@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/dashboard")
+@WebServlet("/auctionlists")
 public class auction_dashboard extends HttpServlet{
 	public void doGet(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException  
 	{  

@@ -463,11 +463,8 @@
 	          var new_dom = 
 	          '<div class="card">'+
 	          '<figure>'+
-	          '<img src="images/listing-list/img-01.jpg" alt="Image Description">'+
-	          '<img src="images/user-icon/img-01.jpg" alt="Image Description">'+
+	          '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="Image Description">'+
 	          '</figure>'+
-	          '<span class="ps-tag">Featured</span>'+
-	          '<span class="ps-tag--arrow"></span>'+
 	          '<div class="card-body">'+
 	          '<div class="ps-card__content">'+
 	          '<div class="ps-card__date">'+

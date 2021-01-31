@@ -25,8 +25,9 @@ public class login extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        if(isAuth) {               
-            resp.sendRedirect("dashboard");
+        if(isAuth) {
+        	req.setAttribute("email",email);
+        	req.getRequestDispatcher("dashboard").forward(req, resp);
         } else {
             req.setAttribute("error_message", "Incorrect password or User not register");
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
