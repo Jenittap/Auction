@@ -1,0 +1,172 @@
+@CHARSET "ISO-8859-1";
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing:content-box;
+}
+
+.form{
+	background: url('Auction.jpg');
+	background-repeat: no-repeat;
+	height : 100vh;
+	background-size: cover;
+	background-position: center;
+	background-color: black;
+}
+
+.form:after{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+}
+
+.content{
+  position: fixed;
+  top: 50%;
+  left: 50%; 
+  z-index: 999;
+  text-align: center;
+  padding: 10px 15px;
+  width: 370px;
+  transform: translate(-50%,-50%);
+  background-color:white;
+}
+
+.label1,.label2,.label3,.label4{
+	text-align: left;
+  	margin: 5px 0;
+  	color: black;
+  	font-size: 16px;
+}
+
+.field1,.field2,.field3,.field4{
+	position: relative;
+	height: 45px
+	width: 100%
+	display: flex;
+	background:rgba(255,255,255,0.94)
+}
+
+.field1 span,.field2 span,.field span,.field3 span,.field4 span{
+	color:black;
+	width: 40px;
+	line-height:45px;
+}
+
+.field1 input,.field2 input,.field3 input,.field4 input{
+	height: 65%;
+	width: 65%;
+	background: transparent;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+.label2,.label3,.label4,.label6{
+  margin-top: 16px;
+}
+
+.field4 i{
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+.label6 a{
+  color: black;
+  text-decoration: none;
+  font-weight:normal;
+  font-family: sans-serif;
+}
+
+.label6:hover a{
+	text-decoration: underline;
+}
+
+.label6{	
+  color: black;
+  text-decoration: none;
+  font-weight:normal;
+  font-family: sans-serif;
+}
+
+.label7 input[type="submit"]{
+  background: #ff5050;
+  border: 1px solid white;
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 1500;
+  cursor: pointer;
+  font-family: sans-serif;
+  padding: 10px 110px ;
+}
+
+.label7 input[type="submit"]:hover{
+  background:transparent;
+  border-color: black;
+  color: black;
+}
+
+.label7{
+  font-color:black;
+  margin: 40px 0;
+  font-family: sans-serif;
+}
+
+.content header{
+	color:white;
+	font-style:normal;
+	background-color:black;
+	border-radius:20px;
+	font-weight:bold;
+	font-size: 35px;
+	padding: 10px;
+	margin: 0 0 10px 0
+	
+}
+
+.tab {
+  overflow: hidden;
+  background-color:radial-gradient(50% 16%, circle, #c36fd4 32%, #332bab 88%);
+}
+
+.tab button {
+  background-color:#ff9999;
+  float: center;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.1s;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size:16px;
+  color:white;
+  font-weight: bold;
+  border: none;
+  border-bottom: 1px solid #888888;
+}
+
+.tab button:hover {
+  background-color:#ffcccc; 
+}
+
+.tab button.active {
+  background-color: #ff5050;
+}
+
+.tabcontent {
+  animation: fadeEffect 1s; 
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}

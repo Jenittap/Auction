@@ -48,7 +48,7 @@
 			
 			<div class="field5">
 				Don't have an account? 
-				<a href="#">Signup</a>
+				<a href="register">Signup</a>
 			</div>
 			</form>
 		</div>

@@ -7,6 +7,9 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.bson.Document;
 
 import java.util.logging.*;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
@@ -40,5 +43,30 @@ public class database {
 		}catch (NoSuchElementException e) {
 			return false;
 		}
+	}
+	
+	public void register(HttpServletRequest req) throws NoSuchAlgorithmException {
+		MongoCollection<Document> user = database.getCollection("user");
+		FindIterable<Document> users = user.find();
+		Iterator<Document> it = users.iterator();
+		int id=0;
+		while (it.hasNext()) {
+			id = Integer.parseInt((String) it.next().get("customer_id"));
+		}
+		Document document = new Document("customer_id", id+1)
+				.append("username", req.getParameter("name"))
+				.append("password", new encrypt().md5encrypt(req.getParameter("password")))
+				.append("email_address", req.getParameter("email"))
+				.append("phonenumber", req.getParameter("phone"))
+				.append("aadhar", "")
+				.append("auction_attended", "")
+				.append("auction_won", "")
+				.append("auction_created", "")
+				.append("is_admin", "0");
+		if(req.getParameter("reg_type").equals("org"))
+			document.append("is_org", "1");
+		else
+			document.append("is_org", "0");
+		user.insertOne(document);
 	}
 }

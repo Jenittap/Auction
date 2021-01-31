@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/signup.css" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+	<div class="form">	
+  		<div class="content">
+  			
+ 			<header> &nbsp; Create your account &nbsp; </header>
+  				<div class="tab">
+  					<button class="tablinks" onclick="openCity(event, 'user')" id="defaultOpen">User</button>
+  					<button class="tablinks" onclick="openCity(event, 'organization')">Organization</button>
+  				</div>
+  		
+  		<div id="user" class="tabcontent">
+   	    <form method="post" action="register" id="form1">
+  	
+  		<div class="label1">
+  			<label for="name"><b>Username</b></label>
+  		</div>
+  		
+  		<div class="field1">
+  			<span class="fa fa-user"></span>
+    		<input type="text" placeholder="Enter your name" name="name" required> <hr>
+  		</div>
+  		
+  		<div class="label2">
+  			<label for="email"><b>Email</b></label>
+  		</div>
+  		
+  		<div class="field2">
+  			<span class="fa fa-envelope"></span>
+    		<input type="email" placeholder="Enter your Email address" name="email" required> <hr>
+    	</div>
+  	
+  		<div class="label3">
+			<label for="phone"><b>Phone</b></label>
+		</div>
+		
+		<div class="field3">
+			<span class="fa fa-phone-square-alt"></span>
+    		<input type="number" placeholder="Enter your phone number" name="phone" required> <hr>
+    	</div>
+	
+		<div class="label4">
+    		<label for="password"><b>Password</b></label>
+    	</div>
+    	
+    	<div class="field4">
+    		<span class="fa fa-lock"></span>
+    		<input type="password" class="pass-key" id="password" placeholder="Enter your password" name="password" required> 
+			<i class="far fa-eye showpwd" onClick="showPwd('password', this)">   </i> <hr>
+    	</div>
+
+		<div class="label6">
+			<input type="checkbox" name="checkbox" value="check" id="agree" required/> By clicking here, I agree to the <a href="#">Terms and Conditions</a>
+		</div>
+		
+		<input type="text" name="reg_type" hidden="" value="user" />
+		
+		<div class="label7">
+    		<input type="submit" name="submit" value="SIGNUP">
+    	</div>
+    
+   </form>
+   </div>
+   
+	<div id="organization" class="tabcontent">
+  		
+   		<form action="register" method="post" id="form2">
+   		<div class="label1">
+  			<label for="name"><b>Name</b></label>
+  		</div>
+  		
+  		<div class="field1">
+  			<span class="fa fa-user"></span>
+    		<input type="text" placeholder="Enter the name of organization" name="name" required> <hr>
+  		</div>
+  		
+  		<div class="label2">
+  			<label for="email"><b>Email</b></label>
+  		</div>
+  		
+  		<div class="field2">
+  			<span class="fa fa-envelope"></span>
+    		<input type="email" placeholder="Enter official Email address" name="email" required> <hr>
+    	</div>
+  	
+  		<div class="label3">
+			<label for="phone"><b>Phone</b></label>
+		</div>
+		
+		<div class="field3">
+			<span class="fa fa-phone-square-alt"></span>
+    		<input type="number" placeholder="Enter official phone number" name="phone" required> <hr>
+    	</div>
+	
+		<div class="label4">
+    		<label for="password"><b>Password</b></label>
+    	</div>
+    	
+    	<div class="field4">
+    		<span class="fa fa-lock"></span>
+    		<input type="password" class="pass-key" id="password" placeholder="Enter your password" name="password" required> 
+			<i class="far fa-eye showpwd" onClick="showPwd('password', this)">   </i> <hr>
+    	</div>
+   		
+   		<div class="label6">
+			<input type="checkbox" name="checkbox" value="check" id="agree" required/> By clicking here, I agree to the <a href="#">Terms and Conditions</a>
+		</div>
+		
+		<input type="text" name="reg_type" hidden="" value="org" />
+		
+		<div class="label7">
+    		<input type="submit" name="submit" value="SIGNUP">
+    	</div>
+    	
+   </form> 
+   </div>
+   </div>
+</div>
+
+	<script>
+	document.getElementById("defaultOpen").click();
+	
+	function showPwd(id, el) {
+		  let x = document.getElementById(id);
+		  if (x.type === "password") {
+		    x.type = "text";
+		    el.className = 'fa fa-eye-slash showpwd';
+		  } else {
+		    x.type = "password";
+		    el.className = 'fa fa-eye showpwd';
+		  }
+		}
+	
+	function openCity(evt, cityName) {
+		  var i, tabcontent, tablinks;
+
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+		    tabcontent[i].style.display = "none";
+		  }
+
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+		    tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+
+		  document.getElementById(cityName).style.display = "block";
+		  evt.currentTarget.className += " active";
+		}
+    </script>
+</body>
+</html>
