@@ -117,7 +117,7 @@
                         <div class="ps-posted-ads ps-my-ads">
                             <div class="ps-posted-ads__heading">
                                 <h5>My Posted Ads</h5>
-                                <button class="btn ps-btn">Post Ad</button>
+                                <button class="btn ps-btn" onclick="location.href='postad'">Post Ad</button>
                             </div>
                             <div class="ps-items-heading">
                                 <h6>Title</h6><h6>Status</h6><h6>Actions</h6>

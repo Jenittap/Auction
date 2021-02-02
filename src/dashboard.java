@@ -3,6 +3,7 @@ import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,13 +18,20 @@ import database;
 @WebServlet("/dashboard")
 public class dashboard extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String email = (String) req.getAttribute("email");
+		String email = null;
+		Cookie[] cookies = req.getCookies();
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("email")) {
+				email = cookie.getValue();
+			}
+		}
 		
 		database db = new database();
 		MongoCollection<Document> users = db.database.getCollection("user");
-		BasicDBObject fields = new BasicDBObject("email_address", email);
 		
 		try {
+			BasicDBObject fields = new BasicDBObject("email_address", email);
+			
 			Document userdata = users.find(fields).iterator().next();
 			req.setAttribute("auction_attended", (((String)userdata.get("auction_attended")).length()>0) ? ((String)userdata.get("auction_attended")) : "0");
 			req.setAttribute("auction_won", (((String)userdata.get("auction_won")).length()>0) ? ((String)userdata.get("auction_won")) : "0");

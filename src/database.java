@@ -69,4 +69,39 @@ public class database {
 			document.append("is_org", "0");
 		user.insertOne(document);
 	}
+	
+	public boolean postad(String title,String Description,String price,String date,String email) {
+		MongoCollection<Document> users = database.getCollection("user");
+		BasicDBObject fields = new BasicDBObject("email_address", email);
+		String username = null;
+		try {
+			Document userdata = users.find(fields).iterator().next();
+			username=(String) userdata.get("username");
+		}catch (NoSuchElementException e) {
+			return false;
+		}
+		
+		MongoCollection<Document> auction = database.getCollection("auction");
+		
+		FindIterable<Document> auctions = auction.find();
+		Iterator<Document> it = auctions.iterator();
+		int id=0;
+		while (it.hasNext()) {
+			id = (Integer) it.next().get("auction_id");
+		}
+		id++;
+		
+		Document document = new Document("auction_id", id)
+				.append("Name", title)
+				.append("Description", Description)
+				.append("Created_by", username)
+				.append("Date", date)
+				.append("Min_Bit", price)
+				.append("Max_Bit", "")
+				.append("Won", "")
+				.append("images", "")
+				.append("Documents", "");
+		auction.insertOne(document);
+		return true;
+	}
 }

@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,7 @@ public class login extends HttpServlet{
 		}
         if(isAuth) {
         	req.setAttribute("email",email);
+        	resp.addCookie(new Cookie("email", email));
         	req.getRequestDispatcher("dashboard").forward(req, resp);
         } else {
             req.setAttribute("error_message", "Incorrect password or User not register");

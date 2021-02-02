@@ -388,7 +388,7 @@
                 </div>
                 SIDEBAR END -->
                 <!-- UNIQUE GADGETS LIST START -->
-                <div class="col-md-7 col-lg-8 col-xl-9">
+                <div class="col-md-12 col-lg-8 col-xl-9">
                     <!-- <div class="ps-uniqueGadgets">
                         <div class="ps-uniqueGadgets__heading">
                             <p>12,076 Record Found</p>
@@ -414,9 +414,8 @@
                         <div id="auction_list">
                         	
                         </div>
-                        </div>
                         
-                        <div class="ps-page">
+                        <!-- <div class="ps-page">
                             <div class="ps-button-left">
                                 <button class="btn"><span class="lnr lnr-chevron-left"></span></button>
                             </div>
@@ -431,7 +430,7 @@
                             <div class="ps-button-right">
                                 <button class="btn"><span class="lnr lnr-chevron-right"></span></button>
                             </div>
-                        </div>
+                        </div> -->
                     </div> 
                 </div>
                 <!-- UNIQUE GADGETS LIST END -->
@@ -476,9 +475,9 @@
 	          '<p class="card-text">'+obj[i*10+j]['Description']+'</p>'+
 	          '</div>'+
 	          '</div>';
-		        dom+=new_dom;
+	          ele.innerHTML+=new_dom;
 	        }
-        	ele.innerHTML+=dom;
+        	//ele.innerHTML+=dom;
         }
         
         $('#pagination-pages').twbsPagination({
