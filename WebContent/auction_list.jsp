@@ -453,7 +453,7 @@
         var ele = document.getElementById("auction_list"); 
         ele.innerHTML="";
         var i;
-        for(i=0;i<((obj.length-(obj.length % 10))/10);i++){
+        for(i=0;i<20;i++){
         	var dom ='<div class="container pagination-page" id="page'+(i+1)+'">';
         	for(var j=0;j<10;j++){
 	        	if(obj[i*10+j]['Max_Bit'] == ""){
@@ -470,8 +470,8 @@
 	          '<span class="d-block"><i class="ti-layers"></i> <a href="javascript:void(0);">'+obj[i*10+j]['Created_by']+'</a></span>'+
 	          '<span><i class="ti-time"></i> <span>'+obj[i*10+j]['Date']+'</span></span>'+
 	          '</div>'+
-	          '<h6>Rs. '+obj[i*10+j]['Max_Bit']+'</h6>'+
-	          '<p>'+obj[i*10+j]['Name']+'</p>'+
+	          '<a href="single_listing.jsp?id='+obj[i*10+j]['auction_id']+'"><h6>'+obj[i*10+j]['Name']+'</h6></a>'+
+	          '<p>Rs. '+obj[i*10+j]['Max_Bit']+'</p>'+
 	          '<p class="card-text">'+obj[i*10+j]['Description']+'</p>'+
 	          '</div>'+
 	          '</div>';
