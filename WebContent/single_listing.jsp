@@ -11,7 +11,19 @@
 <%@page import="com.mongodb.client.model.Updates" %> 
 
 <% 
-    if(request.getParameter("submit")!=null)
+	String email="";
+	Cookie[] cookies = request.getCookies();
+	try{
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("email")) {
+				email = cookie.getValue();
+			}
+		}
+	}catch(Exception e){
+		response.sendRedirect("login");
+	}
+	
+    if(request.getParameter("submit")!=null && request.getParameter("id")!=null)
     {
         String x = request.getParameter("value");
         Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
@@ -28,7 +40,8 @@
         query.append("auction_id",id);
         
         Document setData = new Document();
-        setData.append("Min_Bit", x);
+        setData.append("Min_Bit", x)
+        	.append("Won",email);
         
         Document update = new Document();
         update.append("$set", setData);
@@ -38,6 +51,7 @@
         out.println("Updated");
         mongoClient.close();
     }
+    
    %>
 <head>
     <meta charset="UTF-8">

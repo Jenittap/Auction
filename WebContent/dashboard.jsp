@@ -140,9 +140,15 @@
 	                        			"</div>"+
 	                        			"</div>"+
 	                        			"<div class=\"ps-posted-ads__status\">"+
-	                        			"<h6>Status</h6>"+
-	                        			"<button class=\"btn ps-btn ps-featured\">Under Review</button>"+
-	                        			"</div>"+
+	                        			"<h6>Status</h6>";
+	                        	
+	                        	if("".equals(d.get("Won"))){
+	                        			dom+="<button class=\"btn ps-btn ps-featured\">Under Review</button>";
+	                        	}else{
+	                        		dom+="<button class=\"btn ps-btn ps-primary\">Won by: "+d.get("Won")+"</button>";
+	                        	}
+	                        			
+	                        	dom+="</div>"+
 	                        			"<div class=\"ps-posted-ads__actions\">"+
 	                        			"<h6>Actions</h6>"+
 	                        			"<span><a href=\"javascript:void(0);\" class=\"ps-edit\"><i class=\"ti-pencil\"></i> Edit</a><span>/</span><a href=\"javascript:void(0);\" class=\"ps-delete\"><i class=\"ti-trash\"></i> Delete</a></span>"+
