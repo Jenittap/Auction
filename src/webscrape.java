@@ -64,7 +64,9 @@ public class webscrape {
 					.append("Max_Bit", "")
 					.append("Won", "")
 					.append("images", "")
-					.append("Documents", "");
+					.append("Documents", "")
+					.append("Current_bit", "")
+					.append("Current_holder","");
 					
 					auction.insertOne(temp);
 				}

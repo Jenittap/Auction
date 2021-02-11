@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
+<%
+	String email="";
+	Cookie[] cookies = request.getCookies();
+	try{
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("email")) {
+				email = cookie.getValue();
+			}
+		}
+	}catch(Exception e){
+		response.sendRedirect("login");
+	}
+%>
 <!-- Mirrored from amentotech.com/htmls/psello/dashboard-insights.html by HTTrack Website Copier/3.x [XR&CO"2014], Wed, 05 Feb 2020 13:24:46 GMT -->
 <head>
     <meta charset="UTF-8">
@@ -158,6 +170,64 @@
                         		out.println(dom);
                         	}
                         %>
+                            </ul>
+                        </div>
+                        <br><br>
+                        <div class="ps-posted-ads ps-my-ads">
+                            <div class="ps-posted-ads__heading">
+                                <h5>Attended Auction</h5>
+                                <button class="btn ps-btn" onclick="location.href='postad'">Post Ad</button>
+                            </div>
+                            <div class="ps-items-heading">
+                                <h6>Title</h6><h6>Status</h6>
+                            </div>
+                            <ul>
+                           <%@ page import="org.bson.Document,java.util.*" %>
+                           <%@page import="com.mongodb.*" %> 
+							<%@page import="com.mongodb.client.MongoCollection" %> 
+							<%@page import="com.mongodb.client.FindIterable" %> 
+							<%@page import="com.mongodb.client.MongoDatabase" %> 
+							<%@page import="java.util.logging.*" %> 
+                           <%
+                            Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
+	                       	MongoClientURI uri = new MongoClientURI("mongodb+srv://root:toor@cluster0.ozy3p.mongodb.net/auction?retryWrites=true&w=majority");
+	                       	
+	                       	MongoClient mongoClient = new MongoClient(uri);  
+	                       	MongoDatabase database = mongoClient.getDatabase("auction");
+	                       	BasicDBObject fields = new BasicDBObject("Current_holder", "admin@admin.com");
+	                       	FindIterable<Document> auctions_attended = database.getCollection("auction").find(fields);
+	                       	Iterator<Document> it = auctions_attended.iterator();
+	                       	while(it.hasNext()){
+	                       		Document temp = it.next();
+	                       		String dom = "<li>"+
+	                        			"<div>"+
+	                        			"<div class=\"ps-posted-ads__title\">"+
+	                        			"<h6>"+(String)temp.get("Name")+"</h6>"+
+	                        			"<div>"+
+	                        			"<div class=\"ps-description\">"+
+	                        			"<h5>"+(String)temp.get("Name")+"</h5>"+
+	                        			"<h6>"+(String)temp.get("Description")+"</h6>"+
+	                        			"</div>"+
+	                        			"</div>"+
+	                        			"</div>"+
+	                        			"<div class=\"ps-posted-ads__status\">"+
+	                        			"<h6>Status</h6>";
+	                        	
+	                        	if("".equals((String)temp.get("Won"))){
+	                        			dom+="<button class=\"btn ps-btn ps-featured\">Waiting for End</button>";
+	                        	}else{
+	                        		dom+="<button class=\"btn ps-btn ps-primary\">Won by: "+(String)temp.get("Won")+"</button>";
+	                        	}
+	                        			
+	                        	dom+="</div>"+
+	                        			"<div class=\"ps-posted-ads__actions\">"+
+	                        			"</div>"+
+	                        			"</div>"+
+	                        			"</li>";
+	                       		out.println(dom);
+                        	}
+	                        
+                        	%>
                             </ul>
                         </div>
                     </div>

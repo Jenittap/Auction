@@ -11,11 +11,6 @@
 <%@page import="com.mongodb.client.model.Updates" %> 
 
 <% 
-	Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
-	MongoClientURI uri = new MongoClientURI("mongodb+srv://root:toor@cluster0.ozy3p.mongodb.net/auction?retryWrites=true&w=majority");
-	
-	MongoClient mongoClient = new MongoClient(uri);  
-	MongoDatabase database = mongoClient.getDatabase("auction");
 	String email="";
 	Cookie[] cookies = request.getCookies();
 	try{
@@ -27,16 +22,18 @@
 	}catch(Exception e){
 		response.sendRedirect("login");
 	}
-	BasicDBObject fields = new BasicDBObject("email_address", email);
-	Document user = database.getCollection("user").find(fields).iterator().next();
-	String Name = (String)user.get("username");	
 	
     if(request.getParameter("submit")!=null && request.getParameter("id")!=null)
     {
         String x = request.getParameter("value");
+        Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
+		MongoClientURI uri = new MongoClientURI("mongodb+srv://root:toor@cluster0.ozy3p.mongodb.net/auction?retryWrites=true&w=majority");
+		
+		MongoClient mongoClient = new MongoClient(uri);  
+		MongoDatabase database = mongoClient.getDatabase("auction");
 		
 		MongoCollection<Document> xyz = database.getCollection("auction");
-        
+       
         Integer id= Integer.parseInt(request.getParameter("id"));
         
         Document query = new Document();
@@ -51,7 +48,7 @@
 
         xyz.updateOne(query, update);
         
-        //out.println("Updated");
+        out.println("Updated");
         mongoClient.close();
     }
     
@@ -76,44 +73,32 @@
 	<link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/transitions.css">
 </head>
-
+<%
+    	
+    	Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
+		MongoClientURI uri1 = new MongoClientURI("mongodb+srv://root:toor@cluster0.ozy3p.mongodb.net/auction?retryWrites=true&w=majority");
+	
+		MongoClient mongoClient1 = new MongoClient(uri1);  
+		MongoDatabase database1= mongoClient1.getDatabase("auction");
+	
+		MongoCollection<Document> users1 = database1.getCollection("user");
+		BasicDBObject fields1 = new BasicDBObject("email_address", email);
+		String username1 = null;
+		try {
+			Document userdata = users1.find(fields1).iterator().next();
+			username1=(String) userdata.get("username");
+		}catch (NoSuchElementException e) {
+		}
+		mongoClient1.close();
+    %>
 <body>
     <!-- HEADER START -->
     <header class="ps-main-header3">
         <nav>
             <div class="navbar navbar-expand-lg navbar-light ps-navbar">
                 <div class="ps-navbar__header">
-                    <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Image Description"></a>
-                    <div class="ps-header-form">
-                        <form class="ps-form ps-main-form">
-                            <div class="ps-form__input"><input class="form-control" placeholder="What Are You Looking For?"></div>
-                            <div>
-                                <div class="ps-geo-location ps-location">
-                                    <input type="text" class="form-control" placeholder="Location*">
-                                    <a href="javascript:void(0);" class="ps-location-icon ps-index-icon"><i class="ti-target"></i></a>
-                                    <a href="javascript:void(0);" class="ps-arrow-icon ps-index-icon"><i class="ti-angle-down"></i></a>
-                                    <div class="ps-distance">
-                                        <div class="ps-distance__description">
-                                            <label for="amountfour">Distance:</label>
-                                            <input type="text" id="amountfour" readonly>
-                                        </div>                                           
-                                        <div id="slider-range-min"></div>
-                                    </div>
-                                </div>                     
-                                <button class="btn ps-btn">Search Now</button>
-                                <button class="btn ps-btn ps-icon"><i class="ti-search"></i></button>
-                            </div>
-                        </form>
-                        <div class="ps-form--cancel">
-                            <a href="javascript:void(0);">Cancel</a>
-                            <a href="javascript:void(0);" class="ps-icon"><i class="ti-close"></i></a>
-                        </div> 
-                        <div class="ps-form-btn">
-                            <button class="btn ps-btn">
-                                <i class="ti-search"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <a href="dashboard" class="navbar-brand"><img src="images/logo.png" alt="Image Description"></a>
+                    
                     <div id="ps-nav" class="ps-nav navbar-expand-lg">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="lnr lnr-menu"></i>
@@ -121,16 +106,11 @@
                         <div class="collapse navbar-collapse ps-navigation" id="navbarNav">
                             <ul class="navbar-nav nav-Js ml-auto ps-nav ps-nav__ul">
                                 <li class="ps-menuhover menu-item-has-children page_item_has_children">
-                                    <a href="javascript:void(0);">Main <i class="fas fa-chevron-down"></i></a>
-                                    <ul class="sub-menu ps-dropdown ps-first__dropdown">
-                                        <li class="nav-item"><a href="index.html">Home 1</a></li>
-                                        <li class="dropdown-divider"></li>
-                                        <li class="nav-item"><a href="index-v2.html">Home 2</a></li> 
-                                    </ul>
+                                    <a href="dashboard">Dashboard</a>
                                 </li>
-                                <li class="nav-item"><a href="categories.html">Categories</a></li>
-                                <li class="nav-item"><a href="contact.html">Contact</a></li>
-                                <li class="ps-menuhover menu-item-has-children page_item_has_children">
+                                <li class="nav-item"><a href="javascript:void(0);">XYZ</a></li>
+                                <li class="nav-item"><a href="contact.html"></a></li>
+                                <!-- <li class="ps-menuhover menu-item-has-children page_item_has_children">
                                     <a href="javascript:void(0);" class="ps-header__line"><span class="lnr lnr-menu"></span></a>
                                     <ul class="ps-dropdown sub-menu">
                                         <li>
@@ -167,14 +147,14 @@
                                         <li class="dropdown-divider"></li>
                                         <li class="nav-item"><a href="404-error.html">404 Error</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
                     <div class="ps-navbar__userbtn">
                         <div class="ps-headeruser">              
                             <ul class="navbar-nav ps-nav">
-                                <li class="nav-item ps-login--btn"><a href="login.html" class="btn ps-btn">Login / Register</a></li>
+                                <li class="nav-item ps-login--btn"><a href="javascript:alert('Welcome <%=username1%>');" class="btn ps-btn">Welcome <%=username1%></a></li>
                                 <li class="nav-item dropdown ps-menuhover ps-userlogo">
                                     <a href="javascript:void(0);" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <figure class="d-inline-block">
@@ -213,7 +193,7 @@
                                         <li class="nav-item"><a class="dropdown-item" href="index.html"><i class="ti-shift-right"></i>Logout</a></li>  
                                     </ul>
                                 </li>                              
-                                <li class="nav-item ps-post--btn"><a href="dashboard-insights.html" class="btn ps-btn">Post Ad</a></li>
+                                <li class="nav-item ps-post--btn"><a href="logout" class="btn ps-btn"><i class="ti-shift-right"></i>Logout</a></li>
                             </ul>
                         </div>
                     </div>          
@@ -224,10 +204,10 @@
     <%
     	
     	Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
-		uri = new MongoClientURI("mongodb+srv://root:toor@cluster0.ozy3p.mongodb.net/auction?retryWrites=true&w=majority");
+		MongoClientURI uri = new MongoClientURI("mongodb+srv://root:toor@cluster0.ozy3p.mongodb.net/auction?retryWrites=true&w=majority");
 	
-		mongoClient = new MongoClient(uri);  
-		database = mongoClient.getDatabase("auction");
+		MongoClient mongoClient = new MongoClient(uri);  
+		MongoDatabase database = mongoClient.getDatabase("auction");
 	
 		MongoCollection<Document> xyz = database.getCollection("auction");
 		FindIterable<Document> auctions = xyz.find();
@@ -235,7 +215,7 @@
 		
 		Integer id= Integer.parseInt(request.getParameter("id"));
 		
-		fields = new BasicDBObject("auction_id", id);
+		BasicDBObject fields = new BasicDBObject("auction_id", id);
 		try {
 			Document auctiondata = xyz.find(fields).iterator().next();
     %>
@@ -251,26 +231,35 @@
                     
                 </div>
                 <%
-	                String bal;	
-	                if(((String) auctiondata.get("Current_bit")).equals(""))
-	                {
-	                	bal=(String) auctiondata.get("Min_Bit");
-	                }
-	                else
-	                {
-	                	bal=(String) auctiondata.get("Current_bit");
-	                }	
-               	%>
+                String bal=(String) auctiondata.get("Min_Bit");	
+                if((String) auctiondata.get("Current_bit")==null)
+                {
+                	bal=(String) auctiondata.get("Min_Bit");
+                }
+                else
+                {
+                	bal=(String) auctiondata.get("Current_bit");
+                }	
+                	%>
                 <div class="ps-visit_btn">
-                    <button class="btn ps-dollar ps-btn"><%=(String) bal%></button>
+                    <button class="btn ps-dollar ps-btn"><%=bal%></button>
                     <form name="fname" method="get" action="">
                     	<div class="form-group" >
                     		<input name="id" value="<%=auctiondata.get("auction_id")%>" hidden/>
                     		<input type="number" class="form-control" id="value" name="value" placeholder="Enter Bid">
                     		<br>
+                    		
                    		 	<input type="Submit" id="submit" name="submit" value="submit" onclick="return upload();" class="btn btn-success">
-                   		 	<br><br>
-                   		 	<div class="ps-visit_description" id="current_holder"></div>
+                    		<% 
+                    		if((String) auctiondata.get("Current_holder")==email)
+                    		{
+                    		%>
+                    		<div class="ps-visit_description">
+                    			<h6><%=username1%></h6>
+                    		</div>
+                    		<%
+                    		}
+                    		%>
                     	</div>
                     </form>
                 </div>
@@ -289,59 +278,11 @@
                         </div>
                         <!-- DESCRIPTION END -->
                     </div>
-                    <div class="col-lg-4">
-                    	<p id="timer"></p>
-                    </div>
                     <!-- MAIN CONTENT END -->
             </div>
         </div>
     </main>
     <script>
-    	 var ch = "<%=(String) auctiondata.get("Current_holder")%>";
-    	 if("<%=(String) auctiondata.get("Created_by")%>" == "<%= Name %>"){
-     		document.getElementById("current_holder").innerHTML = "You are auction creator";
-  	        document.getElementById("submit").disabled=true;
-  	        document.getElementById("submit").onclick=function(){return false;}
-     	 }
-    	 else if(ch == "<%= email %>"){
-    		document.getElementById("current_holder").innerHTML = "Your are the last bidder for this auction";
-	        document.getElementById("submit").disabled=true;
-	        document.getElementById("submit").onclick=function(){return false;}
-    	 }
-    	 
-	     var countDownDate = new Date("<%=(String)auctiondata.get("Date") %>").getTime();
-	     var x = setInterval(function(){
-		     var now = new Date().getTime();
-		     var distance = countDownDate - now;
-		
-		     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-		     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		
-		     document.getElementById("timer").innerHTML ="Auction Ends in "+days + " d " + hours + " h "
-		     + minutes + " m " + seconds + " s ";
-		     if (distance < 0) {
-		        clearInterval(x);
-		        document.getElementById("timer").innerHTML = "Auction Closed";
-		        <%
-			        Document query = new Document();
-			        query.append("auction_id",id);
-			        
-			        Document setData = new Document();
-			        setData.append("Won", auctiondata.get("Current_holder"))
-			        		.append("Max_Bit", auctiondata.get("Current_bit"));
-			        
-			        Document update = new Document();
-			        update.append("$set", setData);
-	
-			        xyz.updateOne(query, update);
-		        	out.println("Updated");
-		        %>
-		        document.getElementById("submit").disabled=true;
-		        document.getElementById("submit").onclick=function(){return false;}
-		      }
-	    }, 1000);
            function upload(){
                var s1=document.getElementById("value").value;
 

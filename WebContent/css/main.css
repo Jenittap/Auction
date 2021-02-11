@@ -2937,7 +2937,7 @@ nav {
     background: #fcfcfc;
     color: #999999; }
   .ps-login__area {
-    display: grid;
+    
     grid-template-columns: 1fr auto 1fr;
     padding: 30px;
     border: 1px solid #ddd;
