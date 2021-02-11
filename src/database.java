@@ -51,7 +51,7 @@ public class database {
 		Iterator<Document> it = users.iterator();
 		int id=0;
 		while (it.hasNext()) {
-			id = Integer.parseInt((String) it.next().get("customer_id"));
+			id = (int) it.next().get("customer_id");
 		}
 		Document document = new Document("customer_id", id+1)
 				.append("username", req.getParameter("name"))

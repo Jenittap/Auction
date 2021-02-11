@@ -57,7 +57,7 @@ public class register extends HttpServlet {
 			bool = new Boolean(m.find());
 			
 			if(bool == false) {
-				req.setAttribute("error_message", "");
+				req.setAttribute("error_message", "Password not ");
 	            req.getRequestDispatcher("register").forward(req, res);
 			}
 			

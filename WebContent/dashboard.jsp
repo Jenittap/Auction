@@ -13,7 +13,6 @@
 		response.sendRedirect("login");
 	}
 %>
-<!-- Mirrored from amentotech.com/htmls/psello/dashboard-insights.html by HTTrack Website Copier/3.x [XR&CO"2014], Wed, 05 Feb 2020 13:24:46 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -155,7 +154,7 @@
 	                        			"<h6>Status</h6>";
 	                        	
 	                        	if("".equals(d.get("Won"))){
-	                        			dom+="<button class=\"btn ps-btn ps-featured\">Under Review</button>";
+	                        			dom+="<button class=\"btn ps-btn ps-featured\">Waiting for End</button>";
 	                        	}else{
 	                        		dom+="<button class=\"btn ps-btn ps-primary\">Won by: "+d.get("Won")+"</button>";
 	                        	}

@@ -453,7 +453,7 @@
         var ele = document.getElementById("auction_list"); 
         ele.innerHTML="";
         var i;
-        for(i=0;i<20;i++){
+        for(i=0;i<2;i++){
         	var dom ='<div class="container pagination-page" id="page'+(i+1)+'">';
         	for(var j=0;j<10;j++){
 	        	if(obj[i*10+j]['Max_Bit'] == ""){

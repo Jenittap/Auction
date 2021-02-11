@@ -324,6 +324,8 @@
 		     if (distance < 0) {
 		        clearInterval(x);
 		        document.getElementById("timer").innerHTML = "Auction Closed";
+		        document.getElementById("submit").disabled=true;
+		        document.getElementById("submit").onclick=function(){return false;}
 		        <%
 			        Document query = new Document();
 			        query.append("auction_id",id);
@@ -338,8 +340,6 @@
 			        xyz.updateOne(query, update);
 		        	out.println("Updated");
 		        %>
-		        document.getElementById("submit").disabled=true;
-		        document.getElementById("submit").onclick=function(){return false;}
 		      }
 	    }, 1000);
            function upload(){
