@@ -27,6 +27,9 @@
 	}catch(Exception e){
 		response.sendRedirect("login");
 	}
+	if(email.equals("")){
+		request.getRequestDispatcher("login.jsp").forward(request, response);
+	}
 	BasicDBObject fields = new BasicDBObject("email_address", email);
 	Document user = database.getCollection("user").find(fields).iterator().next();
 	String Name = (String)user.get("username");	

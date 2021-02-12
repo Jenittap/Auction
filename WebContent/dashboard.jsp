@@ -1,6 +1,18 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="eng">
+<%@ page import="org.bson.Document,java.util.*" %>
+<%@page import="com.mongodb.*" %> 
+<%@page import="com.mongodb.client.MongoCollection" %> 
+<%@page import="com.mongodb.client.FindIterable" %> 
+<%@page import="com.mongodb.client.MongoDatabase" %> 
+<%@page import="java.util.logging.*" %>
 <%
+	Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
+	MongoClientURI uri = new MongoClientURI("mongodb+srv://root:toor@cluster0.ozy3p.mongodb.net/auction?retryWrites=true&w=majority");
+	
+	MongoClient mongoClient = new MongoClient(uri); 
+	MongoDatabase database = mongoClient.getDatabase("auction");
+	
 	String email="";
 	String username="";
 	Cookie[] cookies = request.getCookies();
@@ -13,6 +25,10 @@
 	}catch(Exception e){
 		response.sendRedirect("login");
 	}
+	if(email.equals("")){
+		request.getRequestDispatcher("login.jsp").forward(request, response);
+	}
+	Document user = database.getCollection("user").find(new Document("email_address",email)).iterator().next();
 %>
 <head>
     <meta charset="UTF-8">
@@ -55,7 +71,7 @@
                     <div class="ps-navbar__userbtn">
                         <div class="ps-headeruser">              
                             <ul class="navbar-nav ps-nav">
-                                <li class="nav-item ps-post--btn"><a href="javascript:alert('Welcome Kumaran');" class="btn ps-btn style="background-color:#f1c40f">Welcome Kumaran</a></li>                             
+                                <li class="nav-item ps-post--btn"><a href="javascript:alert('Welcome <%=user.get("username")%>');" class="btn ps-btn style="background-color:#f1c40f">Welcome <%=user.get("username")%></a></li>                             
                                 <li class="nav-item ps-post--btn"><a href="logout" class="btn ps-btn"><i class="ti-shift-right"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -144,18 +160,8 @@
                                 <h6>Title</h6><h6>Status</h6>
                             </div>
                             <ul>
-                           <%@ page import="org.bson.Document,java.util.*" %>
-                           <%@page import="com.mongodb.*" %> 
-							<%@page import="com.mongodb.client.MongoCollection" %> 
-							<%@page import="com.mongodb.client.FindIterable" %> 
-							<%@page import="com.mongodb.client.MongoDatabase" %> 
-							<%@page import="java.util.logging.*" %> 
+                            
                            <%
-                            Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
-	                       	MongoClientURI uri = new MongoClientURI("mongodb+srv://root:toor@cluster0.ozy3p.mongodb.net/auction?retryWrites=true&w=majority");
-	                       	
-	                       	MongoClient mongoClient = new MongoClient(uri);  
-	                       	MongoDatabase database = mongoClient.getDatabase("auction");
 	                       	BasicDBObject fields = new BasicDBObject("Current_holder", "admin@admin.com");
 	                       	FindIterable<Document> auctions_attended = database.getCollection("auction").find(fields);
 	                       	Iterator<Document> it = auctions_attended.iterator();
@@ -188,7 +194,7 @@
 	                        			"</li>";
 	                       		out.println(dom);
                         	}
-	                        
+	                        mongoClient.close();
                         	%>
                             </ul>
                         </div>

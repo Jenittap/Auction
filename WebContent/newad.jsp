@@ -1,8 +1,35 @@
-
 <!DOCTYPE html>
-<html lang="zxx">
-
-<!-- Mirrored from amentotech.com/htmls/psello/dashboard-post-ad.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 05 Feb 2020 13:24:59 GMT -->
+<html lang="eng">
+<%@ page import="org.bson.Document,java.util.*" %>
+<%@page import="com.mongodb.*" %> 
+<%@page import="com.mongodb.client.MongoCollection" %> 
+<%@page import="com.mongodb.client.FindIterable" %> 
+<%@page import="com.mongodb.client.MongoDatabase" %> 
+<%@page import="java.util.logging.*" %>
+<%
+	Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
+	MongoClientURI uri = new MongoClientURI("mongodb+srv://root:toor@cluster0.ozy3p.mongodb.net/auction?retryWrites=true&w=majority");
+	
+	MongoClient mongoClient = new MongoClient(uri); 
+	MongoDatabase database = mongoClient.getDatabase("auction");
+	
+	String email="";
+	String username="";
+	Cookie[] cookies = request.getCookies();
+	try{
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("email")) {
+				email = cookie.getValue();
+			}
+		}
+	}catch(Exception e){
+		response.sendRedirect("login");
+	}
+	if(email.equals("")){
+		request.getRequestDispatcher("login.jsp").forward(request, response);
+	}
+	Document user = database.getCollection("user").find(new Document("email_address",email)).iterator().next();
+%>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +74,7 @@
                     <div class="ps-navbar__userbtn">
                         <div class="ps-headeruser">              
                             <ul class="navbar-nav ps-nav">
-                                <li class="nav-item ps-post--btn"><a href="javascript:alert('Welcome Kumaran');" class="btn ps-btn style="background-color:#f1c40f">Welcome Kumaran</a></li>                             
+                                <li class="nav-item ps-post--btn"><a href="javascript:alert('Welcome <%=user.get("username")%>');" class="btn ps-btn style="background-color:#f1c40f">Welcome <%=user.get("username")%></a></li>                             
                                 <li class="nav-item ps-post--btn"><a href="logout" class="btn ps-btn"><i class="ti-shift-right"></i>Logout</a></li>
                             </ul>
                         </div>
