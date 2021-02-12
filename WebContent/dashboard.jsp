@@ -2,6 +2,7 @@
 <html lang="zxx">
 <%
 	String email="";
+	String username="";
 	Cookie[] cookies = request.getCookies();
 	try{
 		for(Cookie cookie : cookies) {
@@ -17,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BootStrap HTML5 CSS3 Theme</title>
+    <title>E-Auction</title>
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 	<link rel="icon" href="images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -37,66 +38,28 @@
         <nav>
             <div class="navbar navbar-expand-lg navbar-light ps-navbar">
                 <div class="ps-navbar__header">
-                    <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Image Description"></a>
-                    </div>
+                    <a href="dashboard" class="navbar-brand"><img src="images/logo.png" alt="Image Description"></a>
+                    
                     <div id="ps-nav" class="ps-nav navbar-expand-lg">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="lnr lnr-menu"></i>
                         </button>
                         <div class="collapse navbar-collapse ps-navigation" id="navbarNav">
                             <ul class="navbar-nav nav-Js ml-auto ps-nav ps-nav__ul">
-                                <li class="ps-menuhover menu-item-has-children page_item_has_children">
-                                    <a href="javascript:void(0);">Main <i class="fas fa-chevron-down"></i></a>
-                                    <ul class="sub-menu ps-dropdown ps-first__dropdown">
-                                        <li class="nav-item"><a href="index.html">Home 1</a></li>
-                                        <li class="dropdown-divider"></li>
-                                        <li class="nav-item"><a href="index-v2.html">Home 2</a></li> 
-                                    </ul>
-                                </li>
-                                <li class="nav-item"><a href="categories.html">Categories</a></li>
-                                <li class="nav-item"><a href="contact.html">Contact</a></li>
-                                <li class="ps-menuhover menu-item-has-children page_item_has_children">
-                                    <a href="javascript:void(0);"><span class="lnr lnr-menu"></span></a>
-                                    <ul class="ps-dropdown sub-menu">
-                                        <li>
-                                            <a href="about.html">About</a>
-                                        </li>
-                                        <li class="dropdown-divider"></li>
-                                        <li class="current-menu-item">
-                                            <a href="privacy-info.html">Privacy Info</a>
-                                        </li>
-                                        <li class="dropdown-divider"></li>
-                                        <li class="ps-menuhover ps-submenuhover menu-item-has-children page_item_has_children">
-                                            <a href="javascript:void(0);">Blog<i class="ti-angle-right"></i></a>
-                                            <ul class="ps-dropdown ps-submenu sub-menu">
-                                                <li class="nav-item"><a href="blog-grid.html">Blog Grid</a></li>                             
-                                                <li class="dropdown-divider"></li>
-                                                <li class="nav-item"><a href="blog-single.html">Blog Single</a></li>  
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown-divider"></li>
-                                        <li class="nav-item ps-menuhover ps-submenuhover menu-item-has-children page_item_has_children">
-                                            <a href="javascript:void(0);">Listing <i class="ti-angle-right"></i></a>
-                                            <ul class="ps-dropdown ps-submenu sub-menu">
-                                                <li class="nav-item"><a href="listing-grid.html">Listing Grid</a></li>                             
-                                                <li class="dropdown-divider"></li>
-                                                <li class="nav-item"><a href="listing-list.html">Listing List</a></li>  
-                                                <li class="dropdown-divider"></li>
-                                                <li class="nav-item"><a href="listing-single.html">Listing Single</a></li>  
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown-divider"></li>
-                                        <li class="nav-item"><a href="login.html">Login</a></li>
-                                        <li class="dropdown-divider"></li>
-                                        <li class="nav-item"><a href="coming-soon.html">Coming Soon</a></li>
-                                        <li class="dropdown-divider"></li>
-                                        <li class="nav-item"><a href="404-error.html">404 Error</a></li>
-                                    </ul>
-                                </li>
+                                
+                                <li class="nav-item"><a href="postad">Post Ad</a></li>
+                                <li class="nav-item"><a href="auctionlists">Action list</a></li>
                             </ul>
                         </div>
-                    </div> 
-
+                    </div>
+                    <div class="ps-navbar__userbtn">
+                        <div class="ps-headeruser">              
+                            <ul class="navbar-nav ps-nav">
+                                <li class="nav-item ps-post--btn"><a href="javascript:alert('Welcome Kumaran');" class="btn ps-btn style="background-color:#f1c40f">Welcome Kumaran</a></li>                             
+                                <li class="nav-item ps-post--btn"><a href="logout" class="btn ps-btn"><i class="ti-shift-right"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>          
                 </div>
             </div>
         </nav>
